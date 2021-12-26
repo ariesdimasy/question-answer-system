@@ -1,4 +1,4 @@
-package entities
+package products
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 )
 
 type ProductDomain struct {
-	ID          uint      `json:"id" gorm:"primary_key"`
+	Id          uint      `json:"id" gorm:"primary_key"`
 	Name        string    `json:"name"`
 	Description string    `json:"description"`
 	CategoryId  int       `json:"category_id"`
@@ -16,7 +16,7 @@ type ProductDomain struct {
 	UpdatedAt   time.Time `json:"updated_at"`
 }
 
-type CategoryCreateDomain struct {
+type ProductCreateDomain struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	CategoryId  int    `json:"category_id"`
@@ -24,8 +24,8 @@ type CategoryCreateDomain struct {
 	Stock       int    `json:"stock"`
 }
 
-type CategoryUpdateDomain struct {
-	ID          uint   `json:"id" gorm:"primary_key"`
+type ProductUpdateDomain struct {
+	Id          uint   `json:"id" gorm:"primary_key"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	CategoryId  int    `json:"category_id"`
@@ -33,19 +33,21 @@ type CategoryUpdateDomain struct {
 	Stock       int    `json:"stock"`
 }
 
-type ProductUseCase interface {
+type ProductUseCaseDomain interface {
 	GetAllProducts(ctx context.Context) ([]ProductDomain, error)
 	GetProductById(ctx context.Context, id int) (ProductDomain, error)
-	GetByCategoryId(ctx context.Context, category_id int) ([]ProductDomain, error)
-	CreateProduct(ctx context.Context, createProduct CategoryCreateDomain) (ProductDomain, error)
-	UpdateProduct(ctx context.Context, updateProduct CategoryUpdateDomain) (ProductDomain, error)
+	GetProductByCategoryId(ctx context.Context, category_id int) ([]ProductDomain, error)
+	CreateProduct(ctx context.Context, createProduct ProductCreateDomain) (ProductDomain, error)
+	UpdateProduct(ctx context.Context, updateProduct ProductUpdateDomain) (ProductDomain, error)
+	DeleteProduct(ctx context.Context, id int) (ProductDomain, error)
 }
 
 type ProductRepository interface {
 	GetAllProducts(ctx context.Context) (
 		res []ProductDomain, err error)
-	GetById(ctx context.Context, id int) (ProductDomain, error)
-	GetByCategoryId(ctx context.Context, category_id int) ([]ProductDomain, error)
-	CreateProduct(ctx context.Context, createProduct CategoryCreateDomain) (ProductDomain, error)
-	UpdateProduct(ctx context.Context, updateProduct CategoryUpdateDomain) (ProductDomain, error)
+	GetProductById(ctx context.Context, id int) (ProductDomain, error)
+	GetProductByCategoryId(ctx context.Context, category_id int) ([]ProductDomain, error)
+	CreateProduct(ctx context.Context, createProduct ProductCreateDomain) (ProductDomain, error)
+	UpdateProduct(ctx context.Context, updateProduct ProductUpdateDomain) (ProductDomain, error)
+	DeleteProduct(ctx context.Context, id int) (ProductDomain, error)
 }
