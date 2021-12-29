@@ -28,8 +28,8 @@ type CategoryUseCaseDomain interface {
 type CategoryRepository interface {
 	GetAllCategories(ctx context.Context) (
 		res []CategoryDomain, err error)
-	GetCategoryById(ctx context.Context, id int) (CategoryDomain, error)
-	CreateCategory(ctx context.Context, categoryName string) (CategoryDomain, error)
-	UpdateCategory(ctx context.Context, categoryUpdate CategoryUpdateDomain) (CategoryDomain, error)
-	DeleteCategory(ctx context.Context, id int) (CategoryDomain, error)
+	GetCategoryById(ctx context.Context, id int) (res CategoryDomain, err error)
+	CreateCategory(ctx context.Context, categoryName string) (res CategoryDomain, err error)
+	UpdateCategory(ctx context.Context, categoryUpdate CategoryUpdateDomain) (res CategoryDomain, err error)
+	DeleteCategory(ctx context.Context, id int) (res CategoryDomain, err error)
 }
