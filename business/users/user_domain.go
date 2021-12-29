@@ -20,10 +20,15 @@ type UserRegisterDomain struct {
 	Password string `json:"password"`
 }
 
+type UserLoginDomain struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
 type UserUseCaseDomain interface {
 	GetAllUser(ctx context.Context) ([]UserDomain, error)
 	GetUserById(ctx context.Context, id string) (UserDomain, error)
-	Login(ctx context.Context, email string, password string) (UserDomain, error)
+	Login(ctx context.Context, userLogin UserLoginDomain) (UserDomain, error)
 	Register(ctx context.Context, user UserRegisterDomain) (UserDomain, error)
 	DeleteUser(ctx context.Context, id string) (UserDomain, error)
 }
@@ -31,7 +36,7 @@ type UserUseCaseDomain interface {
 type UserRepository interface {
 	GetAllUser(ctx context.Context) (res []UserDomain, err error)
 	GetUserById(ctx context.Context, id string) (res UserDomain, err error)
-	Login(ctx context.Context, email string, password string) (res UserDomain, err error)
+	Login(ctx context.Context, userLogin UserLoginDomain) (res UserDomain, err error)
 	Register(ctx context.Context, user UserRegisterDomain) (res UserDomain, err error)
 	DeleteUser(ctx context.Context, id string) (res UserDomain, err error)
 }

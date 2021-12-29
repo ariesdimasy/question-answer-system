@@ -35,8 +35,8 @@ func (uc *UserUsecase) GetUserById(ctx context.Context, id string) (UserDomain, 
 	return user, nil
 }
 
-func (uc *UserUsecase) Login(ctx context.Context, email string, password string) (UserDomain, error) {
-	user, err := uc.repository.Login(ctx, email, password)
+func (uc *UserUsecase) Login(ctx context.Context, userLogin UserLoginDomain) (UserDomain, error) {
+	user, err := uc.repository.Login(ctx, userLogin)
 	if err != nil {
 		return UserDomain{}, err
 	}
