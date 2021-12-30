@@ -8,7 +8,6 @@ import (
 	// "acp-final/controllers/auth/response"
 	// "acp-final/helpers"
 
-	// "acp-final/controllers/products/request"
 	// "acp-final/controllers/products/response"
 
 	"github.com/labstack/echo/v4"
@@ -25,4 +24,9 @@ func (cl *ControllerList) RouteRegister(c *echo.Echo) {
 	// c.GET("/users/login", cl.UserController.Login)
 
 	c.GET("/products", cl.ProductController.GetAllProducts)
+	c.GET("/products/:id", cl.ProductController.GetProductById)
+	c.GET("/products/category/:categoryId", cl.ProductController.GetProductByCategoryId)
+	c.POST("/products", cl.ProductController.CreateProduct)
+	c.PUT("/products", cl.ProductController.UpdateProduct)
+
 }

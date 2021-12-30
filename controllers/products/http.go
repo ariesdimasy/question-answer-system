@@ -78,7 +78,7 @@ func (controller *ProductController) CreateProduct(c echo.Context) error {
 
 }
 
-func (controller *ProductController) UpdateProduct(c echo.Context, updateProduct _productsDomain.ProductUpdateDomain) error {
+func (controller *ProductController) UpdateProduct(c echo.Context) error {
 	ctx := c.Request().Context()
 	productRequest := _request.UpdateProduct{}
 
