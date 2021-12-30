@@ -28,3 +28,37 @@ func (controller *UserController) GetAllUser(c echo.Context) error {
 
 	return _controllers.NewSuccessResponse(c, _response.ToListFromDomain(users))
 }
+
+func (controller *UserController) Login(c echo.Context, userlogin _usersDomain.UserLoginDomain) error {
+	ctx := c.Request().Context()
+	user, err := controller.usecase.Login(ctx, userlogin)
+
+	if err != nil {
+		return _controllers.NewErrorResponse(c, err)
+	}
+
+	return _controllers.NewSuccessResponse(c, _response.FromDomain(user))
+}
+
+func (controller *UserController) Register(c echo.Context, userRegister _usersDomain.UserRegisterDomain) error {
+	ctx := c.Request().Context()
+	user, err := controller.usecase.Register(ctx, userRegister)
+
+	if err != nil {
+		return _controllers.NewErrorResponse(c, err)
+	}
+
+	return _controllers.NewSuccessResponse(c, _response.FromDomain(user))
+}
+
+func (controller *UserController) DeleteUser(c echo.Context, user_id string) error {
+	ctx := c.Request().Context()
+
+	user, err := controller.usecase.DeleteUser(ctx, user_id)
+
+	if err != nil {
+		return _controllers.NewErrorResponse(c, err)
+	}
+
+	return _controllers.NewSuccessResponse(c, _response.FromDomain(user))
+}
