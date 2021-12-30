@@ -15,6 +15,7 @@ type OrderDetailDomain struct {
 }
 
 type OrderDetailCreateDomain struct {
+	Id       uint   `json:"id" gorm:"primary_key"`
 	OrderId  string `json:"order_id"`
 	Quantity int    `json:"quantity"`
 	Price    int    `json:"price"`

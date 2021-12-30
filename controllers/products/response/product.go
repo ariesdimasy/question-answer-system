@@ -9,7 +9,7 @@ type ProductResponse struct {
 	Id          uint      `json:"id"`
 	Name        string    `json:"name"`
 	Description string    `json:"description"`
-	CategoryId  int       `json:"category_id"`
+	CategoryId  uint      `json:"category_id"`
 	Price       int       `json:"price"`
 	Stock       int       `json:"stock"`
 	CreatedAt   time.Time `json:"created_at"`

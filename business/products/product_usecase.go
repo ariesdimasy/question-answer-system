@@ -35,7 +35,7 @@ func (uc *ProductUsecase) GetProductById(ctx context.Context, id int) (ProductDo
 	return Product, nil
 }
 
-func (uc *ProductUsecase) GetProductByCategoryId(ctx context.Context, category_id int) ([]ProductDomain, error) {
+func (uc *ProductUsecase) GetProductByCategoryId(ctx context.Context, category_id uint) ([]ProductDomain, error) {
 	// timeout
 	Product, err := uc.repository.GetProductByCategoryId(ctx, category_id)
 	if err != nil {

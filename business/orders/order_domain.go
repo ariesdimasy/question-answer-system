@@ -7,20 +7,21 @@ import (
 
 type OrderDomain struct {
 	Id         uint      `json:"id" gorm:"primary_key"`
-	CustomerId string    `json:"customer_id"`
+	CustomerId uint      `json:"customer_id"`
 	TotalPrice string    `json:"total_price"`
 	CreatedAt  time.Time `json:"created_at"`
 	UpdatedAt  time.Time `json:"updated_at"`
 }
 
 type CreateOrderDomain struct {
-	CustomerId string `json:"customer_id"`
+	Id         uint   `json:"id" gorm:"primary_key"`
+	CustomerId uint   `json:"customer_id"`
 	TotalPrice string `json:"total_price"`
 }
 
 type UpdateOrderDomain struct {
 	Id         uint   `json:"id" gorm:"primary_key"`
-	CustomerId string `json:"customer_id"`
+	CustomerId uint   `json:"customer_id"`
 	TotalPrice string `json:"total_price"`
 }
 

@@ -5,6 +5,10 @@ type CreateCategory struct {
 }
 
 type UpdateCategory struct {
-	Id           int    `json:"id"`
+	Id           uint   `json:"id"`
 	CategoryName string `json:"category_name"`
+}
+
+type DeleteCategory struct {
+	Id uint `json:"id"`
 }

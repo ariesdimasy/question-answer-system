@@ -8,6 +8,9 @@ import (
 	// "acp-final/controllers/auth/response"
 	// "acp-final/helpers"
 
+	// "acp-final/controllers/products/request"
+	// "acp-final/controllers/products/response"
+
 	"github.com/labstack/echo/v4"
 	// "github.com/labstack/gommon/email"
 )
@@ -19,7 +22,7 @@ type ControllerList struct {
 
 func (cl *ControllerList) RouteRegister(c *echo.Echo) {
 	c.GET("/users", cl.UserController.GetAllUser)
-	c.GET("/users/login", cl.UserController.Login(c))
+	// c.GET("/users/login", cl.UserController.Login)
 
 	c.GET("/products", cl.ProductController.GetAllProducts)
 }
