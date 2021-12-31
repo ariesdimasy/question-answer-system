@@ -41,7 +41,7 @@ func (uc *OrderUsecase) GetOrderByCustomerId(ctx context.Context, id int) ([]Ord
 	return Orders, nil
 }
 
-func (uc *OrderUsecase) CreateOrder(ctx context.Context, createOrder CreateOrderDomain) (OrderDomain, error) {
+func (uc *OrderUsecase) CreateOrder(ctx context.Context, createOrder OrderDomain) (OrderDomain, error) {
 	Order, err := uc.repository.CreateOrder(ctx, createOrder)
 	if err != nil {
 		return OrderDomain{}, err
@@ -49,7 +49,7 @@ func (uc *OrderUsecase) CreateOrder(ctx context.Context, createOrder CreateOrder
 	return Order, nil
 }
 
-func (uc *OrderUsecase) UpdateOrder(ctx context.Context, updateOrder UpdateOrderDomain) (OrderDomain, error) {
+func (uc *OrderUsecase) UpdateOrder(ctx context.Context, updateOrder OrderDomain) (OrderDomain, error) {
 	Order, err := uc.repository.UpdateOrder(ctx, updateOrder)
 	if err != nil {
 		return OrderDomain{}, err

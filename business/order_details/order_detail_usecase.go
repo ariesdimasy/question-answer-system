@@ -41,7 +41,7 @@ func (uc *OrderDetailUsecase) GetByOrderDetailId(ctx context.Context, id int) (O
 	return OrderDetail, nil
 }
 
-func (uc *OrderDetailUsecase) CreateOrderDetail(ctx context.Context, createOrderDetail OrderDetailCreateDomain) (OrderDetailDomain, error) {
+func (uc *OrderDetailUsecase) CreateOrderDetail(ctx context.Context, createOrderDetail OrderDetailDomain) (OrderDetailDomain, error) {
 	OrderDetail, err := uc.repository.CreateOrderDetail(ctx, createOrderDetail)
 	if err != nil {
 		return OrderDetailDomain{}, err
@@ -49,7 +49,7 @@ func (uc *OrderDetailUsecase) CreateOrderDetail(ctx context.Context, createOrder
 	return OrderDetail, nil
 }
 
-func (uc *OrderDetailUsecase) UpdateOrderDetail(ctx context.Context, updateOrderDetail OrderDetailUpdateDomain) (OrderDetailDomain, error) {
+func (uc *OrderDetailUsecase) UpdateOrderDetail(ctx context.Context, updateOrderDetail OrderDetailDomain) (OrderDetailDomain, error) {
 	OrderDetail, err := uc.repository.UpdateOrderDetail(ctx, updateOrderDetail)
 	if err != nil {
 		return OrderDetailDomain{}, err
