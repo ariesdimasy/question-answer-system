@@ -6,9 +6,9 @@ import (
 	"log"
 	"time"
 
-	_userUsecase "acp-final/business/users"
-	_userController "acp-final/controllers/users"
-	_userRepo "acp-final/drivers/databases/users"
+	// _userUsecase "acp-final/business/users"
+	// _userController "acp-final/controllers/users"
+	// _userRepo "acp-final/drivers/databases/users"
 
 	_productUseCase "acp-final/business/products"
 	_productController "acp-final/controllers/products"
@@ -45,9 +45,9 @@ func main() {
 	db := configDB.ConnectDB()
 	timeoutContext := time.Duration(viper.GetInt("context.timeout")) * time.Second
 
-	userRepo := _userRepo.NewUserRepository(db)
-	userUseCase := _userUsecase.NewUserUsecase(userRepo, timeoutContext)
-	userController := _userController.NewUserController(userUseCase)
+	// userRepo := _userRepo.NewUserRepository(db)
+	// userUseCase := _userUsecase.NewUserUsecase(userRepo, timeoutContext)
+	// userController := _userController.NewUserController(userUseCase)
 
 	productRepo := _productRepo.NewUserRepository(db)
 	productUseCase := _productUseCase.NewProductUsecase(productRepo, timeoutContext)
@@ -55,9 +55,10 @@ func main() {
 
 	e := echo.New()
 	routesInit := _route.ControllerList{
-		UserController:    *userController,
+		// UserController:    *userController,
 		ProductController: *productController,
 	}
+
 	routesInit.RouteRegister(e)
 
 	log.Fatal(e.Start(viper.GetString("server.address")))
