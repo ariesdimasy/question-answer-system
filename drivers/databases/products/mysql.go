@@ -64,12 +64,18 @@ func (repo *ProductRepositoryDatabase) GetProductById(ctx context.Context, produ
 	return productResult.ToDomain(), nil
 }
 
-func (repo *ProductRepositoryDatabase) CreateProduct(ctx context.Context, createProduct _productDomain.ProductCreateDomain) (_productDomain.ProductDomain, error) {
-	var productResult Product
+func (repo *ProductRepositoryDatabase) CreateProduct(ctx context.Context, createProduct _productDomain.ProductDomain) (_productDomain.ProductDomain, error) {
+	var productResult Product = Product{
+		Name:        createProduct.Name,
+		Description: createProduct.Description,
+		CategoryId:  createProduct.CategoryId,
+		Stock:       createProduct.Stock,
+		Price:       createProduct.Price,
+	}
 
-	result := repo.db.Create(&createProduct)
+	result := repo.db.Create(&productResult) // return full row { ID:1, Name:"asdas"}
 
-	repo.db.Where("id = ?", &createProduct.Id).Find(&productResult)
+	// repo.db.Where("id = ?", &createProduct.Id).Find(&productResult)
 
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
@@ -83,16 +89,16 @@ func (repo *ProductRepositoryDatabase) CreateProduct(ctx context.Context, create
 
 }
 
-func (repo *ProductRepositoryDatabase) UpdateProduct(ctx context.Context, updateProduct _productDomain.ProductUpdateDomain) (_productDomain.ProductDomain, error) {
-	var productResult Product
-
-	result := repo.db.Model(&Product{}).Where("id = ?", updateProduct.Id).Updates(Product{
+func (repo *ProductRepositoryDatabase) UpdateProduct(ctx context.Context, updateProduct _productDomain.ProductDomain) (_productDomain.ProductDomain, error) {
+	var productResult Product = Product{
 		Name:        updateProduct.Name,
-		CategoryId:  updateProduct.CategoryId,
 		Description: updateProduct.Description,
-		Price:       updateProduct.Price,
+		CategoryId:  updateProduct.CategoryId,
 		Stock:       updateProduct.Stock,
-	})
+		Price:       updateProduct.Price,
+	}
+
+	result := repo.db.Model(&Product{}).Where("id = ?", updateProduct.Id).Updates(productResult).Find(&Product{})
 
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {

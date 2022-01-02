@@ -44,7 +44,7 @@ func (uc *ProductUsecase) GetProductByCategoryId(ctx context.Context, category_i
 	return Product, nil
 }
 
-func (uc *ProductUsecase) CreateProduct(ctx context.Context, createProduct ProductCreateDomain) (ProductDomain, error) {
+func (uc *ProductUsecase) CreateProduct(ctx context.Context, createProduct ProductDomain) (ProductDomain, error) {
 	Product, err := uc.repository.CreateProduct(ctx, createProduct)
 	if err != nil {
 		return ProductDomain{}, err
@@ -52,7 +52,7 @@ func (uc *ProductUsecase) CreateProduct(ctx context.Context, createProduct Produ
 	return Product, nil
 }
 
-func (uc *ProductUsecase) UpdateProduct(ctx context.Context, updateProduct ProductUpdateDomain) (ProductDomain, error) {
+func (uc *ProductUsecase) UpdateProduct(ctx context.Context, updateProduct ProductDomain) (ProductDomain, error) {
 	Product, err := uc.repository.UpdateProduct(ctx, updateProduct)
 	if err != nil {
 		return ProductDomain{}, err

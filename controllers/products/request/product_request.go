@@ -1,15 +1,14 @@
 package request
 
 type ProductId struct {
-	Id uint `json:"id" gorm:"primary_key"`
+	Id uint `param:"category_id"`
 }
 
 type CategoryId struct {
-	CategoryId uint `json:"category_id"`
+	CategoryId uint `param:"category_id"`
 }
 
 type CreateProduct struct {
-	Id          uint   `json:"id" gorm:"primary_key"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	CategoryId  uint   `json:"category_id"`
@@ -18,7 +17,7 @@ type CreateProduct struct {
 }
 
 type UpdateProduct struct {
-	Id          uint   `json:"id" gorm:"primary_key"`
+	Id          uint   `param:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	CategoryId  uint   `json:"category_id"`
@@ -27,5 +26,5 @@ type UpdateProduct struct {
 }
 
 type DeleteProduct struct {
-	Id uint `json:"id" gorm:"primary_key"`
+	Id uint `param:"id"`
 }
