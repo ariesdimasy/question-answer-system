@@ -12,7 +12,7 @@ type ProductRepositoryDatabase struct {
 	db *gorm.DB
 }
 
-func NewUserRepository(database *gorm.DB) _productDomain.ProductRepository {
+func NewProductRepository(database *gorm.DB) _productDomain.ProductRepository {
 	return &ProductRepositoryDatabase{
 		db: database,
 	}

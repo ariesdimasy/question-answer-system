@@ -14,6 +14,10 @@ import (
 	_productController "acp-final/controllers/products"
 	_productRepo "acp-final/drivers/databases/products"
 
+	_categoryUseCase "acp-final/business/categories"
+	_categoryController "acp-final/controllers/categories"
+	_categoryRepo "acp-final/drivers/databases/categories"
+
 	_route "acp-final/apps/routes"
 
 	"github.com/labstack/echo/v4"
@@ -49,14 +53,19 @@ func main() {
 	// userUseCase := _userUsecase.NewUserUsecase(userRepo, timeoutContext)
 	// userController := _userController.NewUserController(userUseCase)
 
-	productRepo := _productRepo.NewUserRepository(db)
+	productRepo := _productRepo.NewProductRepository(db)
 	productUseCase := _productUseCase.NewProductUsecase(productRepo, timeoutContext)
 	productController := _productController.NewProductController(productUseCase)
+
+	categoryRepo := _categoryRepo.NewCategoryRepository(db)
+	categoryUseCase := _categoryUseCase.NewCategoryUsecase(categoryRepo, timeoutContext)
+	categoryController := _categoryController.NewCategoryController(categoryUseCase)
 
 	e := echo.New()
 	routesInit := _route.ControllerList{
 		// UserController:    *userController,
-		ProductController: *productController,
+		ProductController:  *productController,
+		CategoryController: *categoryController,
 	}
 
 	routesInit.RouteRegister(e)

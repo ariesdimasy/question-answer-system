@@ -25,7 +25,7 @@ func (uc *CategoryUsecase) GetAllCategories(ctx context.Context) ([]CategoryDoma
 	return categories, nil
 }
 
-func (uc *CategoryUsecase) GetCategoryById(ctx context.Context, id int) (CategoryDomain, error) {
+func (uc *CategoryUsecase) GetCategoryById(ctx context.Context, id uint) (CategoryDomain, error) {
 	category, err := uc.repository.GetCategoryById(ctx, id)
 	if err != nil {
 		return CategoryDomain{}, err
@@ -49,7 +49,7 @@ func (uc *CategoryUsecase) UpdateCategory(ctx context.Context, categoryUpdate Ca
 	return category, nil
 }
 
-func (uc *CategoryUsecase) DeleteCategory(ctx context.Context, id int) (CategoryDomain, error) {
+func (uc *CategoryUsecase) DeleteCategory(ctx context.Context, id uint) (CategoryDomain, error) {
 	category, err := uc.repository.DeleteCategory(ctx, id)
 	if err != nil {
 		return CategoryDomain{}, err
