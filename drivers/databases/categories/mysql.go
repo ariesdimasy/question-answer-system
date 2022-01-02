@@ -36,7 +36,7 @@ func (repo *categoryRepositoryDatabase) GetAllCategories(ctx context.Context) ([
 
 func (repo *categoryRepositoryDatabase) GetCategoryById(ctx context.Context, category_id uint) (_categoryDomain.CategoryDomain, error) {
 	var category Category
-	result := repo.db.Where("category_id = ?", category_id).Find(&category)
+	result := repo.db.Debug().Where("id = ?", category_id).Find(&category)
 
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {

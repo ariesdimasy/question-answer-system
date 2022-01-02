@@ -6,6 +6,8 @@ import (
 	_request "acp-final/controllers/categories/request"
 	_response "acp-final/controllers/categories/response"
 
+	"strconv"
+
 	"github.com/labstack/echo/v4"
 )
 
@@ -32,7 +34,13 @@ func (controller *CategoryController) GetAllCategories(c echo.Context) error {
 
 func (controller *CategoryController) GetCategoryById(c echo.Context) error {
 	ctx := c.Request().Context()
-	categoryRequest := _request.CategoryId{}
+
+	value := c.Param("id")
+	number, err := strconv.ParseUint(value, 10, 32)
+
+	categoryRequest := _request.CategoryId{
+		Id: uint(number), //Convert uint64 To int,
+	}
 
 	Category, err := controller.usecase.GetCategoryById(ctx, categoryRequest.Id)
 

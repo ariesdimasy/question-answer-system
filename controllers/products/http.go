@@ -7,6 +7,8 @@ import (
 	_response "acp-final/controllers/products/response"
 	"fmt"
 
+	"strconv"
+
 	"github.com/labstack/echo/v4"
 )
 
@@ -36,7 +38,14 @@ func (controller *ProductController) GetProductById(c echo.Context) error {
 	productRequest := _request.ProductId{}
 	c.Bind(&productRequest) // error handling
 
-	Product, err := controller.usecase.GetProductById(ctx, int(productRequest.Id))
+	value := c.Param("id")
+	number, err := strconv.ParseUint(value, 10, 32)
+
+	finalNumber := _request.ProductId{
+		Id: uint(number),
+	}
+
+	Product, err := controller.usecase.GetProductById(ctx, int(finalNumber.Id))
 
 	if err != nil {
 		return _controllers.NewErrorResponse(c, err)
@@ -53,7 +62,14 @@ func (controller *ProductController) GetProductByCategoryId(c echo.Context) erro
 		return err
 	}
 
-	products, err := controller.usecase.GetProductByCategoryId(ctx, productRequest.CategoryId)
+	value := c.Param("category_id")
+	number, err := strconv.ParseUint(value, 10, 32)
+
+	finalNumber := _request.CategoryId{
+		CategoryId: uint(number),
+	}
+
+	products, err := controller.usecase.GetProductByCategoryId(ctx, finalNumber.CategoryId)
 
 	if err != nil {
 		return _controllers.NewErrorResponse(c, err)

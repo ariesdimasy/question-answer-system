@@ -36,7 +36,7 @@ func (repo *ProductRepositoryDatabase) GetAllProducts(ctx context.Context) ([]_p
 
 func (repo *ProductRepositoryDatabase) GetProductByCategoryId(ctx context.Context, category_id uint) ([]_productDomain.ProductDomain, error) {
 	var products []Product
-	result := repo.db.Where("category_id = ?", category_id).Find(&products)
+	result := repo.db.Debug().Where("category_id = ?", category_id).Find(&products)
 
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
@@ -51,7 +51,7 @@ func (repo *ProductRepositoryDatabase) GetProductByCategoryId(ctx context.Contex
 
 func (repo *ProductRepositoryDatabase) GetProductById(ctx context.Context, product_id int) (_productDomain.ProductDomain, error) {
 	var productResult Product
-	result := repo.db.FirstOrInit(&productResult, map[string]interface{}{"id": product_id})
+	result := repo.db.Debug().Where("id = ?", product_id).Find(&productResult)
 
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
