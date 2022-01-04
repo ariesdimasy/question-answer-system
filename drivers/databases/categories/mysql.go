@@ -71,11 +71,14 @@ func (repo *categoryRepositoryDatabase) CreateCategory(ctx context.Context, cate
 }
 
 func (repo *categoryRepositoryDatabase) UpdateCategory(ctx context.Context, updatecategory _categoryDomain.CategoryDomain) (_categoryDomain.CategoryDomain, error) {
-	var categoryResult Category
+	var categoryResult Category = Category{
+		Id:           updatecategory.Id,
+		CategoryName: updatecategory.CategoryName,
+	}
 
 	result := repo.db.Model(&Category{}).Where("id = ?", updatecategory.Id).Updates(Category{
 		CategoryName: updatecategory.CategoryName,
-	})
+	}).Find(&Category{})
 
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {

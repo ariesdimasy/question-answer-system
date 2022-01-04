@@ -55,6 +55,9 @@ func (controller *CategoryController) GetCategoryById(c echo.Context) error {
 func (controller *CategoryController) CreateCategory(c echo.Context) error {
 	ctx := c.Request().Context()
 	categoryRequest := _request.CreateCategory{}
+	if err := c.Bind(&categoryRequest); err != nil {
+		return err
+	}
 
 	category, err := controller.usecase.CreateCategory(ctx, categoryRequest.CategoryName)
 
@@ -70,8 +73,15 @@ func (controller *CategoryController) UpdateCategory(c echo.Context) error {
 	ctx := c.Request().Context()
 	categoryRequest := _request.UpdateCategory{}
 
+	if err := c.Bind(&categoryRequest); err != nil {
+		return err
+	}
+
+	value := c.Param("id")
+	number, err := strconv.ParseUint(value, 10, 32)
+
 	category, err := controller.usecase.UpdateCategory(ctx, _categoryDomain.CategoryDomain{
-		Id:           categoryRequest.Id,
+		Id:           uint(number),
 		CategoryName: categoryRequest.CategoryName,
 	})
 
@@ -87,7 +97,14 @@ func (controller *CategoryController) DeleteCategory(c echo.Context) error {
 	ctx := c.Request().Context()
 	categoryRequest := _request.DeleteCategory{}
 
-	Category, err := controller.usecase.DeleteCategory(ctx, categoryRequest.Id)
+	if err := c.Bind(&categoryRequest); err != nil {
+		return err
+	}
+
+	value := c.Param("id")
+	number, err := strconv.ParseUint(value, 10, 32)
+
+	Category, err := controller.usecase.DeleteCategory(ctx, uint(number))
 
 	if err != nil {
 		return _controllers.NewErrorResponse(c, err)
