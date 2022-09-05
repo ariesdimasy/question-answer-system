@@ -11,7 +11,7 @@
         "port": "3306",
         "user": "root",
         "pass": "",
-        "name": "ACP14"
+        "name": "qa-system-db"
     },
     "jwt": {
         "secret": "ariesDimasYudhistira!@#$%",

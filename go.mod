@@ -1,4 +1,4 @@
-module acp-final
+module qa-system
 
 go 1.16
 

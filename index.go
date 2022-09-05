@@ -6,17 +6,9 @@ import (
 	"log"
 	"time"
 
-	// _userUsecase "acp-final/business/users"
-	// _userController "acp-final/controllers/users"
-	// _userRepo "acp-final/drivers/databases/users"
-
-	_productUseCase "acp-final/business/products"
-	_productController "acp-final/controllers/products"
-	_productRepo "acp-final/drivers/databases/products"
-
-	_categoryUseCase "acp-final/business/categories"
-	_categoryController "acp-final/controllers/categories"
-	_categoryRepo "acp-final/drivers/databases/categories"
+	_userUsecase "acp-final/business/users"
+	_userController "acp-final/controllers/users"
+	_userRepo "acp-final/drivers/databases/users"
 
 	_route "acp-final/apps/routes"
 
@@ -49,23 +41,13 @@ func main() {
 	db := configDB.ConnectDB()
 	timeoutContext := time.Duration(viper.GetInt("context.timeout")) * time.Second
 
-	// userRepo := _userRepo.NewUserRepository(db)
-	// userUseCase := _userUsecase.NewUserUsecase(userRepo, timeoutContext)
-	// userController := _userController.NewUserController(userUseCase)
-
-	productRepo := _productRepo.NewProductRepository(db)
-	productUseCase := _productUseCase.NewProductUsecase(productRepo, timeoutContext)
-	productController := _productController.NewProductController(productUseCase)
-
-	categoryRepo := _categoryRepo.NewCategoryRepository(db)
-	categoryUseCase := _categoryUseCase.NewCategoryUsecase(categoryRepo, timeoutContext)
-	categoryController := _categoryController.NewCategoryController(categoryUseCase)
+	userRepo := _userRepo.NewUserRepository(db)
+	userUseCase := _userUsecase.NewUserUsecase(userRepo, timeoutContext)
+	userController := _userController.NewUserController(userUseCase)
 
 	e := echo.New()
 	routesInit := _route.ControllerList{
-		// UserController:    *userController,
-		ProductController:  *productController,
-		CategoryController: *categoryController,
+		UserController: *userController,
 	}
 
 	routesInit.RouteRegister(e)

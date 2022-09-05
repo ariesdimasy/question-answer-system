@@ -1,9 +1,11 @@
 package databases
 
 import (
-	_userDb "acp-final/drivers/databases/users"
 	"fmt"
 	"log"
+	_questionDb "qa-system/drivers/databases/questions"
+	_testDb "qa-system/drivers/databases/tests"
+	_userDb "qa-system/drivers/databases/users"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -35,6 +37,8 @@ func (config *ConfigDB) ConnectDB() *gorm.DB {
 
 func DBMigrate(db *gorm.DB) {
 	db.AutoMigrate(
+		&_testDb.Test{},
 		&_userDb.User{},
+		&_questionDb.Question{},
 	)
 }

@@ -1,7 +1,7 @@
 package users
 
 import (
-	_userDomain "acp-final/business/users"
+	_userDomain "qa-system/business/users"
 	"time"
 
 	"gorm.io/gorm"
